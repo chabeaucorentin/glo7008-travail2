@@ -25,14 +25,14 @@ De plus, il est possible à un administrateur d'obtenir la liste des rétroactio
 | [frontend](./api-gateway)   | 80     | GET `/`   | `/api/polarity` <br> `/api/feedback` | POST <br> POST| [api-gateway](/api-gateway)            |
 
 ## Travail demandé
-La tâche principale que vous aurez à effectuer est de définir les manifestes Kubernetes pour ce système.
-Voici une liste des resources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de divérger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 
-### api-gateway
+La tâche principale que vous aurez à effectuer est de définir les manifestes Kubernetes pour ce système. 
+
+Voici une liste des ressources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de diverger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 30### api-gateway
 #### Critères d'acceptation
 
 - 2 Replicas
 - LivenessProbe ***HTTP***
-- Exposé à l'exterieur du cluster sous le prefix `/api` (***Note importante: Il vous ait interdit de modifier le code de l'application directement, cela doit être fait au travers des resources que vous offre Kubernetes***)
+- Exposé à l'extérieur du cluster sous le prefix `/api` (***Note importante: Il vous est interdit de modifier le code de l'application directement, cela doit être fait au travers des ressources que vous offre Kubernetes***)
 
 #### Ressources attendues
 
@@ -56,8 +56,8 @@ Voici une liste des resources que vous devriez avoir pour un fonctionnement adé
 
 - 2 Replicas
 - LivenessProbe ***HTTP***
-- Admin path pour obtenir tous les feedbacks stocké (`/admin/feedback`)
-- Persistence utilisant une base de donnée SQLite
+- Admin path pour obtenir tous les feedbacks stockés (`/admin/feedback`)
+- Persistance utilisant une base de donnée SQLite
 
 #### Ressources attendues
 
@@ -70,7 +70,7 @@ Voici une liste des resources que vous devriez avoir pour un fonctionnement adé
 #### Critères d'acceptation
 
 - 1 Replica
-- Exposé à l'exterieur du cluster sous le prefix `/`
+- Exposé à l'extérieur du cluster sous le prefix `/`
 
 #### Ressources attendues
 
