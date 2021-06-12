@@ -18,8 +18,10 @@ services:
     - "8080:8080"
     environment:
     - LOGIC_API_URL=http://logic-api:5000
+    - FEEDBACK_API_URL=http://feedback-api:5001
     links:
     - logic-api
+    - feedback-api
 
   logic-api:
     image: localregistry.lc:30500/logic-api:submission
@@ -35,7 +37,7 @@ services:
       context: feedback-api
       dockerfile: Dockerfile
     ports:
-    - "9000:80"
+    - "9000:5001"
     environment:
     - DATABASE_DIR=/usr/db
     volumes:

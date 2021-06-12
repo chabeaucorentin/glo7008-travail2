@@ -19,7 +19,7 @@ public class PolarityController {
     private String logicApiUrl;
 
     @PostMapping
-    public PolarityDto sentenceAnalysis(@RequestBody SentenceDto sentenceDto) {
+    public PolarityDto analyseSentence(@RequestBody SentenceDto sentenceDto) {
         RestTemplate restTemplate = new RestTemplate();
         logger.trace(String.format("Routing request to Logic api at url %s", logicApiUrl));
 

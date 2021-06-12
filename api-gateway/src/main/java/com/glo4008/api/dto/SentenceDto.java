@@ -1,6 +1,5 @@
 package com.glo4008.api.dto;
 
-
 public class SentenceDto {
     private String sentence;
 
