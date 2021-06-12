@@ -1,0 +1,42 @@
+version: "3.0"
+
+services:
+  frontend:
+    image: localregistry.lc:30500/frontend:submission
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+    - "80:80"
+
+  api-gateway:
+    image: localregistry.lc:30500/api-gateway:submission
+    build:
+      context: api-gateway
+      dockerfile: Dockerfile
+    ports:
+    - "8080:8080"
+    environment:
+    - LOGIC_API_URL=http://logic-api:5000
+    links:
+    - logic-api
+
+  logic-api:
+    image: localregistry.lc:30500/logic-api:submission
+    build:
+      context: logic-api
+      dockerfile: Dockerfile
+    ports:
+    - "5000:5000"
+
+  feedback-api:
+    image: localregistry.lc:30500/feedback-api:submission
+    build:
+      context: feedback-api
+      dockerfile: Dockerfile
+    ports:
+    - "9000:80"
+    environment:
+    - DATABASE_DIR=/usr/db
+    volumes:
+     - "./feedback-api/Database:/usr/db"
