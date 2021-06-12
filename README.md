@@ -14,3 +14,66 @@ Suite à l'obtention d'un score, il est possible à l'usagé de répondre une qu
 De plus, il est possible à un administrateur d'obtenir la liste des rétroactions en communiquant directement avec le service `feedback-api`.
 
 ## Vue globale du système
+![overview diagram](./doc/images/feature_diagram.png "Overview diagram")
+
+## Description des services
+| Service                       | Port                      |  Endpoints                    | Requests                  | Type | From          |
+| -------------                 |-------------              | -----                         |-------                    |----|----           |
+| [api-gateway](./api-gateway)   | 8080     | POST `/polarity` <br> POST `/feedback`   | `/analyse/sentence` <br> `/feedback` | POST <br> POST| [logic-api](/logic-api)  <br>  [feedback-api](/feedback-api)            |
+| [logic-api](./logic-api)   | 5000     | POST  `/polarity`   | NA | NA | NA |
+| [feedback-api](./feedback-api)   | 9000     | POST `/feedback` <br> GET `/feedback`   | Insert <br> Get all | query | Database (sqlite) |
+| [frontend](./api-gateway)   | 80     | GET `/`   | `/api/polarity` <br> `/api/feedback` | POST <br> POST| [api-gateway](/api-gateway)            |
+
+## Travail demandé
+La tâche principale que vous aurez à effectuer est de définir les manifestes Kubernetes pour ce système.
+Voici une liste des resources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de divérger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 
+### api-gateway
+#### Critères d'acceptation
+
+- 2 Replicas
+- LivenessProbe ***HTTP***
+- Exposé à l'exterieur du cluster sous le prefix `/api` (***Note importante: Il vous ait interdit de modifier le code de l'application directement, cela doit être fait au travers des resources que vous offre Kubernetes***)
+
+#### Ressources attendues
+
+- Deployment
+- service
+- Ingress
+
+### logic-api
+#### Critères d'acceptation
+
+- 2 Replicas
+- LivenessProbe ***HTTP***
+
+#### Ressources attendues
+
+- Deployment
+- service
+
+### feedback-api
+#### Critères d'acceptation
+
+- 2 Replicas
+- LivenessProbe ***HTTP***
+- Admin path pour obtenir tous les feedbacks stocké (`/admin/feedback`)
+- Persistence utilisant une base de donnée SQLite
+
+#### Ressources attendues
+
+- Deployment
+- service
+- Ingress
+- PersistentVolumeClaim
+
+### frontend
+#### Critères d'acceptation
+
+- 1 Replica
+- Exposé à l'exterieur du cluster sous le prefix `/`
+
+#### Ressources attendues
+
+- Deployment
+- service
+- Ingress
