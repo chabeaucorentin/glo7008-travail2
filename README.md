@@ -101,13 +101,26 @@ Voici une liste des ressources que vous devriez avoir pour un fonctionnement ad�
 
 Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste suivante des fonctionnalités à implémenter cumulant un total d'au moins 20 points. Si vous décidez d'aller plus loin et d'avoir un total de points plus élevé, ces points seront convertis en bonus jusqu'à un maximum de 10 points. C'est à dire que si vous implémentez (correctement) un total de 40 points, vous obtiendrez 30 sur cette section.
 
-- (FA1) Intégration du [Service Mesh Consul-Connect](https://www.consul.io/docs/connect) ==> ***5%***
-  - (FA11) Intégration de la fonctionnalité de Service Discovery de Consul-Connect ==> ***5%***
-  - (FA12) Observabilité des services et de leurs états (healthcheck) au travers du UI de Consul ==> ***5%***
-  - (FA13) Définition d'[Intentions](https://www.consul.io/docs/k8s/connect/ingress-gateways#defining-an-intention) limitant la communication entre les services au stricte nécéssaire ==> ***10%***
-  - (FA14) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) ==> ***10%***
-- (FA2) Observabilité et monitoring
-  - (FA21) Intégration d'un outil de gestion de journaux ([Loki](https://github.com/grafana/loki), [Fluentd](https://www.fluentd.org/), [Logstash](https://www.elastic.co/logstash), ...) ==> ***5%***
-  - (FA22) Intégration de monitoring des ressources ([Prometheus](https://github.com/prometheus/prometheus)...) ==> ***5%***
-  - (FA22) Intégration de tracing des communications ([Jaeger](https://www.jaegertracing.io/)...) ==> ***5%***
-  - (FA23) Visualisation ([Grafana](https://grafana.com/), [Kibana](https://www.elastic.co/kibana), ...) ==> ***10%***
+- (FA1) Sécuriser et encrypter les communications au travers de certificats SSL. ==> ***10%***
+- (FA2) Intégration du [Service Mesh Consul-Connect](https://www.consul.io/docs/connect) ==> ***5%***
+  - (FA21) Intégration de la fonctionnalité de Service Discovery de Consul-Connect ==> ***5%***
+  - (FA22) Observabilité des services et de leurs états (healthcheck) au travers du UI de Consul ==> ***5%***
+  - (FA23) Définition d'[Intentions](https://www.consul.io/docs/k8s/connect/ingress-gateways#defining-an-intention) limitant la communication entre les services au strict nécessaire ==> ***10%***
+  - (FA24) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) ==> ***10%***
+- (FA3) Observabilité et monitoring
+  - (FA31) Intégration d'un outil de gestion de journaux ([Loki](https://github.com/grafana/loki), [Fluentd](https://www.fluentd.org/), [Logstash](https://www.elastic.co/logstash), ...) ==> ***5%***
+  - (FA32) Intégration de monitoring des ressources ([Prometheus](https://github.com/prometheus/prometheus)...) ==> ***5%***
+  - (FA32) Intégration de tracing des communications ([Jaeger](https://www.jaegertracing.io/)...) ==> ***5%***
+  - (FA33) Visualisation ([Grafana](https://grafana.com/), [Kibana](https://www.elastic.co/kibana), ...) ==> ***10%***
+- (FA4) Intégration d'une platforme Git au cluster ([Gitlab](https://docs.gitlab.com/ee/install/), [Gitea](https://gitea.io/en-us/), ...) ==> ***5%***
+  - (FA41) Pipeline CI/CD pour tester, builder et publier les applications automatiquement ([Tekton](https://tekton.dev/), [Jenkins](https://www.jenkins.io/), Gitlab CI,...) ==> ***25%*** (5% intégration + 5% par pipeline/service)
+  - (FA42) Intégration de Continuous Delivery ([ArgoCD](https://argoproj.github.io/argo-cd/)) ==> ***25%*** (5% intégration + 5% par pipeline/service)
+
+- (FAC) Fonctionnalité(s) avancée(s) de votre choix. Vous devrez contacter l'équipe d'enseignants pour déterminer si votre idée peut être considérée ou non comme une fonctionnalité avancée et pour déterminer le pointage de celle-ci.
+
+
+## Consigne de remise
+
+Nous vous demandons de compresser votre soumission en une seule archive (avec le `.git`). De plus, Nous vous demanderons de remplir le fichier [`submission.md`](./submission.md) avec tout commentaire ou directive nécessaire au fonctionnement de votre système. Normalement, votre soumission devrait être fonctionnelle d'office. Autrement, cela pourrait engendrer des pénalités. Les directives additionnelles en liens avec les fonctionnalités avancées n'engendreront pas de pénalité.
+
+Il vous faudra aussi remplir le fichier [`submission.json`](./submission.json) avec les informations spécifiées (nom, idul, FA,...).
