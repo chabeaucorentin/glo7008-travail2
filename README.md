@@ -2,6 +2,30 @@
 # Travail pratique GLO-4008/7008
 Ce répértoire contient l'application ***Sentence Analyzer*** qui sert de point de départ pour le travail pratique du cours GLO-4008/7008: Applications infonuagique et DevOps.
 
+## Table des matières
+- [Travail pratique GLO-4008/7008](#travail-pratique-glo-4008-7008)
+  * [Table des matières](#table-des-matières)
+  * [Pré-requis](#pré-requis)
+  * [Description de l'application](#description-de-lapplication)
+  * [Vue globale du système](#vue-globale-du-système)
+  * [Description des services](#description-des-services)
+  * [Travail demandé](#travail-demandé)
+    + [api-gateway](#api-gateway)
+      - [Critères d'acceptation](#critères-dacceptation)
+      - [Ressources attendues](#ressources-attendues)
+    + [logic-api](#logic-api)
+      - [Critères d'acceptation](#critères-dacceptation-1)
+      - [Ressources attendues](#ressources-attendues-1)
+    + [feedback-api](#feedback-api)
+      - [Critères d'acceptation](#critères-dacceptation-2)
+      - [Ressources attendues](#ressources-attendues-2)
+    + [frontend](#frontend)
+      - [Critères d'acceptation](#critères-dacceptation-3)
+      - [Ressources attendues](#ressources-attendues-3)
+  * [Barème](#barème)
+    + [Fonctionnalités avancées](#fonctionnalités-avancées---20----)
+  * [Consignes de remise](#consignes-de-remise)
+
 ## Pré-requis
 Pour ce travail, vous aurez besoin d'un cluster Kubernetes supportant les Ingress Controllers et éventuellement les Services Mesh. Nous assumons que vous utilisez [l'environnement local fourni](https://github.com/medmouine/vagrant-k3s-HA-cluster). Celui-ci est configuré à l'aide d'un registre d'images local, accèssible au travers d'un service NodePort (30500) et de l'url `localregistry.lc`. Cela a principalement pour but de contourner les limitations de dockerhub et de faciliter la correction. C'est pour cela que les images qui seront utilisées par Kubernetes pour le déploiment du système sont tous sous la forme `localregistry.lc:30500/service:submission`. Le tag `submission` est celui qui sera utilisé lors de la correction. Si vous changez ces configurations pour une utilisation dans un environnement différent de celui fourni, assurez-vous de remettre celles-ci tel que présenté.
 
@@ -32,7 +56,9 @@ De plus, il est possible à un administrateur d'obtenir la liste des rétroactio
 ## Travail demandé
 La tâche principale que vous aurez à effectuer est de définir les manifestes Kubernetes pour ce système. 
 
-Voici une liste des ressources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de diverger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 30### api-gateway
+Voici une liste des ressources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de diverger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 30
+
+### api-gateway
 #### Critères d'acceptation
 
 - 2 Replicas
