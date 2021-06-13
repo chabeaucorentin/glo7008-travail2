@@ -2,6 +2,11 @@
 # Travail pratique GLO-4008/7008
 Ce répértoire contient l'application ***Sentence Analyzer*** qui sert de point de départ pour le travail pratique du cours GLO-4008/7008: Applications infonuagique et DevOps.
 
+## Pré-requis
+Pour ce travail, vous aurez besoin d'un cluster Kubernetes supportant les Ingress Controllers et éventuellement les Services Mesh. Nous assumons que vous utilisez [l'environnement local fourni](https://github.com/medmouine/vagrant-k3s-HA-cluster). Celui-ci est configuré à l'aide d'un registre d'images local, accèssible au travers d'un service NodePort (30500) et de l'url `localregistry.lc`. Cela a principalement pour but de contourner les limitations de dockerhub et de faciliter la correction. C'est pour cela que les images qui seront utilisées par Kubernetes pour le déploiment du système sont tous sous la forme `localregistry.lc:30500/service:submission`. Le tag `submission` est celui qui sera utilisé lors de la correction. Si vous changez ces configurations pour une utilisation dans un environnement différent de celui fourni, assurez-vous de remettre celles-ci tel que présenté.
+
+Un script [`./initialize_submission.sh`](./initialize_submission.sh) vous est fourni dans ce répértoire et vous permettera de construire les images de tous les services et de les push au registrie local du cluster.
+
 ## Description de l'application
 ***Sentence Analyzer*** est une application très simple exposant une interface web permettant l'entrée d'une phrase (*sentence*) dont la polarité (*Polarity*) est analysée pour détérminer si celle-ci a une tonalité positive ou négative.
 
@@ -56,15 +61,17 @@ Voici une liste des ressources que vous devriez avoir pour un fonctionnement ad�
 
 - 2 Replicas
 - LivenessProbe ***HTTP***
-- Admin path pour obtenir tous les feedbacks stockés (`/admin/feedback`)
 - Persistance utilisant une base de donnée SQLite
+- Admin path pour obtenir tous les feedbacks stockés (`/admin/feedback`) (Cette endpoint n'est pas sécurisé par défaut)
 
 #### Ressources attendues
 
 - Deployment
 - service
-- Ingress
 - PersistentVolumeClaim
+- Ingress Admin
+
+***Note importante*** L'ingress Admin ne devrait pas être spécifique au service feedback-api. En effet, nous vous demandons de définir un ingress générique qui pourrait être étendu pour l'ajout de nouveaux endpoints d'admin.
 
 ### frontend
 #### Critères d'acceptation
@@ -77,3 +84,30 @@ Voici une liste des ressources que vous devriez avoir pour un fonctionnement ad�
 - Deployment
 - service
 - Ingress
+
+## Barème
+
+- `/` retourne l'interface web = ***10%***
+- Soumission d'une *Sentence* pour analyse fonctionnelle = ***10%***
+- Retour de la polarité lors d'une soumission = ***10%***
+- Soumission d'un *feedback* suite à une soumission = ***10%***
+- Stockage des feedback dans la persistance SQLite = ***10%***
+- Obtenir la liste des feedbacks grâce à une requête `GET /admin/feedback` = ***15%***
+- Pénalités pour non respect de spécificités et/ou des critères de qualité (i.e ingress Admin non générique, absence ou mauvaise configuration de la DB SQLite...) = ***15%***
+
+*==> Nous nous réservons le droit de juger de ce qui se mérite ou non une pénalité et du poids de celle-ci. Utilisez votre bon-sens lors de l'exécution du travail. Gardez toujours en tête les principaux concepts du DevOps et de l'ingénierie logiciel (Scalability...). En cas de doute, n'hésitez pas à poser la question lors d'un laboratoire ou sur le forum.*
+
+### Fonctionnalités avancées ***20%***
+
+Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste suivante des fonctionnalités à implémenter cumulant un total d'au moins 20 points. Si vous décidez d'aller plus loin et d'avoir un total de points plus élevé, ces points seront convertis en bonus jusqu'à un maximum de 10 points. C'est à dire que si vous implémentez (correctement) un total de 40 points, vous obtiendrez 30 sur cette section.
+
+- (FA1) Intégration du [Service Mesh Consul-Connect](https://www.consul.io/docs/connect) ==> ***5%***
+  - (FA11) Intégration de la fonctionnalité de Service Discovery de Consul-Connect ==> ***5%***
+  - (FA12) Observabilité des services et de leurs états (healthcheck) au travers du UI de Consul ==> ***5%***
+  - (FA13) Définition d'[Intentions](https://www.consul.io/docs/k8s/connect/ingress-gateways#defining-an-intention) limitant la communication entre les services au stricte nécéssaire ==> ***10%***
+  - (FA14) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) ==> ***10%***
+- (FA2) Observabilité et monitoring
+  - (FA21) Intégration d'un outil de gestion de journaux ([Loki](https://github.com/grafana/loki), [Fluentd](https://www.fluentd.org/), [Logstash](https://www.elastic.co/logstash), ...) ==> ***5%***
+  - (FA22) Intégration de monitoring des ressources ([Prometheus](https://github.com/prometheus/prometheus)...) ==> ***5%***
+  - (FA22) Intégration de tracing des communications ([Jaeger](https://www.jaegertracing.io/)...) ==> ***5%***
+  - (FA23) Visualisation ([Grafana](https://grafana.com/), [Kibana](https://www.elastic.co/kibana), ...) ==> ***10%***
