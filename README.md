@@ -119,8 +119,8 @@ Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste 
 - (FAC) Fonctionnalité(s) avancée(s) de votre choix. Vous devrez contacter l'équipe d'enseignants pour déterminer si votre idée peut être considérée ou non comme une fonctionnalité avancée et pour déterminer le pointage de celle-ci.
 
 
-## Consigne de remise
+## Consignes de remise
 
 Nous vous demandons de compresser votre soumission en une seule archive (avec le `.git`). De plus, Nous vous demanderons de remplir le fichier [`submission.md`](./submission.md) avec tout commentaire ou directive nécessaire au fonctionnement de votre système. Normalement, votre soumission devrait être fonctionnelle d'office. Autrement, cela pourrait engendrer des pénalités. Les directives additionnelles en liens avec les fonctionnalités avancées n'engendreront pas de pénalité.
 
-Il vous faudra aussi remplir le fichier [`submission.json`](./submission.json) avec les informations spécifiées (nom, idul, FA,...).
+Il vous faudra aussi remplir le fichier [`submission.json`](./submission.json) avec les informations spécifiées (nom, NIP, FA,...).
