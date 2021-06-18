@@ -118,21 +118,21 @@ Voici une liste des ressources que vous devriez avoir pour un fonctionnement ad�
 - Retour de la polarité lors d'une soumission = ***10%***
 - Soumission d'un *feedback* suite à une soumission = ***10%***
 - Stockage des feedback dans la persistance SQLite = ***10%***
-- Obtenir la liste des feedbacks grâce à une requête `GET /admin/feedback` = ***15%***
-- Pénalités pour non respect de spécificités et/ou des critères de qualité (i.e ingress Admin non générique, absence ou mauvaise configuration de la DB SQLite...) = ***15%***
+- Obtenir la liste des feedbacks grâce à une requête `GET /admin/feedback` = ***10%***
+- Pénalités pour non respect de spécificités et/ou des critères de qualité (i.e ingress Admin non générique, absence ou mauvaise configuration de la DB SQLite...) = ***10%***
 
 *==> Nous nous réservons le droit de juger de ce qui se mérite ou non une pénalité et du poids de celle-ci. Utilisez votre bon-sens lors de l'exécution du travail. Gardez toujours en tête les principaux concepts du DevOps et de l'ingénierie logiciel (Scalability...). En cas de doute, n'hésitez pas à poser la question lors d'un laboratoire ou sur le forum.*
 
-### Fonctionnalités avancées ***20%***
+### Fonctionnalités avancées ***30%***
 
-Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste suivante des fonctionnalités à implémenter cumulant un total d'au moins 20 points. Si vous décidez d'aller plus loin et d'avoir un total de points plus élevé, ces points seront convertis en bonus jusqu'à un maximum de 10 points. C'est à dire que si vous implémentez (correctement) un total de 40 points, vous obtiendrez 30 sur cette section.
+Pour obtenir les derniers ***30%***, il vous faudra sélectionner dans la liste suivante des fonctionnalités à implémenter cumulant un total d'au moins 30 points. Si vous décidez d'aller plus loin et d'avoir un total de points plus élevé, l’excédent ne sera pas contabilisé.
 
 - (FA1) Sécuriser et encrypter les communications au travers de certificats SSL. ==> ***10%***
 - (FA2) Intégration du [Service Mesh Consul-Connect](https://www.consul.io/docs/connect) ==> ***5%***
   - (FA21) Intégration de la fonctionnalité de Service Discovery de Consul-Connect ==> ***5%***
   - (FA22) Observabilité des services et de leurs états (healthcheck) au travers du UI de Consul ==> ***5%***
   - (FA23) Définition d'[Intentions](https://www.consul.io/docs/k8s/connect/ingress-gateways#defining-an-intention) limitant la communication entre les services au strict nécessaire ==> ***10%***
-  - (FA24) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) ==> ***10%***
+  - (FA24) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) (Au travers de Consul) ==> ***10%***
 - (FA3) Observabilité et monitoring
   - (FA31) Intégration d'un outil de gestion de journaux ([Loki](https://github.com/grafana/loki), [Fluentd](https://www.fluentd.org/), [Logstash](https://www.elastic.co/logstash), ...) ==> ***5%***
   - (FA32) Intégration de monitoring des ressources ([Prometheus](https://github.com/prometheus/prometheus)...) ==> ***5%***
@@ -141,8 +141,6 @@ Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste 
 - (FA4) Intégration d'une platforme Git au cluster ([Gitlab](https://docs.gitlab.com/ee/install/), [Gitea](https://gitea.io/en-us/), ...) ==> ***5%***
   - (FA41) Pipeline CI/CD pour tester, builder et publier les applications automatiquement ([Tekton](https://tekton.dev/), [Jenkins](https://www.jenkins.io/), Gitlab CI,...) ==> ***25%*** (5% intégration + 5% par pipeline/service)
   - (FA42) Intégration de Continuous Delivery ([ArgoCD](https://argoproj.github.io/argo-cd/)) ==> ***25%*** (5% intégration + 5% par pipeline/service)
-
-- (FAC) Fonctionnalité(s) avancée(s) de votre choix. Vous devrez contacter l'équipe d'enseignants pour déterminer si votre idée peut être considérée ou non comme une fonctionnalité avancée et pour déterminer le pointage de celle-ci.
 
 
 ## Consignes de remise
