@@ -2,6 +2,30 @@
 # Travail pratique GLO-4008/7008
 Ce répértoire contient l'application ***Sentence Analyzer*** qui sert de point de départ pour le travail pratique du cours GLO-4008/7008: Applications infonuagique et DevOps.
 
+## Table des matières
+- [Travail pratique GLO-4008/7008](#travail-pratique-glo-4008-7008)
+  * [Table des matières](#table-des-matières)
+  * [Pré-requis](#pré-requis)
+  * [Description de l'application](#description-de-lapplication)
+  * [Vue globale du système](#vue-globale-du-système)
+  * [Description des services](#description-des-services)
+  * [Travail demandé](#travail-demandé)
+    + [api-gateway](#api-gateway)
+      - [Critères d'acceptation](#critères-dacceptation)
+      - [Ressources attendues](#ressources-attendues)
+    + [logic-api](#logic-api)
+      - [Critères d'acceptation](#critères-dacceptation-1)
+      - [Ressources attendues](#ressources-attendues-1)
+    + [feedback-api](#feedback-api)
+      - [Critères d'acceptation](#critères-dacceptation-2)
+      - [Ressources attendues](#ressources-attendues-2)
+    + [frontend](#frontend)
+      - [Critères d'acceptation](#critères-dacceptation-3)
+      - [Ressources attendues](#ressources-attendues-3)
+  * [Barème](#barème)
+    + [Fonctionnalités avancées](#fonctionnalités-avancées---20----)
+  * [Consignes de remise](#consignes-de-remise)
+
 ## Pré-requis
 Pour ce travail, vous aurez besoin d'un cluster Kubernetes supportant les Ingress Controllers et éventuellement les Services Mesh. Nous assumons que vous utilisez [l'environnement local fourni](https://github.com/medmouine/vagrant-k3s-HA-cluster). Celui-ci est configuré à l'aide d'un registre d'images local, accèssible au travers d'un service NodePort (30500) et de l'url `localregistry.lc`. Cela a principalement pour but de contourner les limitations de dockerhub et de faciliter la correction. C'est pour cela que les images qui seront utilisées par Kubernetes pour le déploiment du système sont tous sous la forme `localregistry.lc:30500/service:submission`. Le tag `submission` est celui qui sera utilisé lors de la correction. Si vous changez ces configurations pour une utilisation dans un environnement différent de celui fourni, assurez-vous de remettre celles-ci tel que présenté.
 
@@ -32,7 +56,9 @@ De plus, il est possible à un administrateur d'obtenir la liste des rétroactio
 ## Travail demandé
 La tâche principale que vous aurez à effectuer est de définir les manifestes Kubernetes pour ce système. 
 
-Voici une liste des ressources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de diverger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 30### api-gateway
+Voici une liste des ressources que vous devriez avoir pour un fonctionnement adéquat du système. Libre à vous de diverger de ces directives, tant que le fonctionnement est maintenu et que vous respectez les consignes spécifiées ci-bas. 30
+
+### api-gateway
 #### Critères d'acceptation
 
 - 2 Replicas
@@ -92,21 +118,21 @@ Voici une liste des ressources que vous devriez avoir pour un fonctionnement ad�
 - Retour de la polarité lors d'une soumission = ***10%***
 - Soumission d'un *feedback* suite à une soumission = ***10%***
 - Stockage des feedback dans la persistance SQLite = ***10%***
-- Obtenir la liste des feedbacks grâce à une requête `GET /admin/feedback` = ***15%***
-- Pénalités pour non respect de spécificités et/ou des critères de qualité (i.e ingress Admin non générique, absence ou mauvaise configuration de la DB SQLite...) = ***15%***
+- Obtenir la liste des feedbacks grâce à une requête `GET /admin/feedback` = ***10%***
+- Pénalités pour non respect de spécificités et/ou des critères de qualité (i.e ingress Admin non générique, absence ou mauvaise configuration de la DB SQLite...) = ***10%***
 
 *==> Nous nous réservons le droit de juger de ce qui se mérite ou non une pénalité et du poids de celle-ci. Utilisez votre bon-sens lors de l'exécution du travail. Gardez toujours en tête les principaux concepts du DevOps et de l'ingénierie logiciel (Scalability...). En cas de doute, n'hésitez pas à poser la question lors d'un laboratoire ou sur le forum.*
 
-### Fonctionnalités avancées ***20%***
+### Fonctionnalités avancées ***30%***
 
-Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste suivante des fonctionnalités à implémenter cumulant un total d'au moins 20 points. Si vous décidez d'aller plus loin et d'avoir un total de points plus élevé, ces points seront convertis en bonus jusqu'à un maximum de 10 points. C'est à dire que si vous implémentez (correctement) un total de 40 points, vous obtiendrez 30 sur cette section.
+Pour obtenir les derniers ***30%***, il vous faudra sélectionner dans la liste suivante des fonctionnalités à implémenter cumulant un total d'au moins 30 points. Si vous décidez d'aller plus loin et d'avoir un total de points plus élevé, l’excédent ne sera pas contabilisé.
 
 - (FA1) Sécuriser et encrypter les communications au travers de certificats SSL. ==> ***10%***
 - (FA2) Intégration du [Service Mesh Consul-Connect](https://www.consul.io/docs/connect) ==> ***5%***
   - (FA21) Intégration de la fonctionnalité de Service Discovery de Consul-Connect ==> ***5%***
   - (FA22) Observabilité des services et de leurs états (healthcheck) au travers du UI de Consul ==> ***5%***
   - (FA23) Définition d'[Intentions](https://www.consul.io/docs/k8s/connect/ingress-gateways#defining-an-intention) limitant la communication entre les services au strict nécessaire ==> ***10%***
-  - (FA24) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) ==> ***10%***
+  - (FA24) Configuration de [Canary Deployment](https://martinfowler.com/bliki/CanaryRelease.html) et/ou [Blue-green/A-B Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) (Au travers de Consul) ==> ***10%***
 - (FA3) Observabilité et monitoring
   - (FA31) Intégration d'un outil de gestion de journaux ([Loki](https://github.com/grafana/loki), [Fluentd](https://www.fluentd.org/), [Logstash](https://www.elastic.co/logstash), ...) ==> ***5%***
   - (FA32) Intégration de monitoring des ressources ([Prometheus](https://github.com/prometheus/prometheus)...) ==> ***5%***
@@ -115,8 +141,6 @@ Pour obtenir les derniers ***20%***, il vous faudra sélectionner dans la liste 
 - (FA4) Intégration d'une platforme Git au cluster ([Gitlab](https://docs.gitlab.com/ee/install/), [Gitea](https://gitea.io/en-us/), ...) ==> ***5%***
   - (FA41) Pipeline CI/CD pour tester, builder et publier les applications automatiquement ([Tekton](https://tekton.dev/), [Jenkins](https://www.jenkins.io/), Gitlab CI,...) ==> ***25%*** (5% intégration + 5% par pipeline/service)
   - (FA42) Intégration de Continuous Delivery ([ArgoCD](https://argoproj.github.io/argo-cd/)) ==> ***25%*** (5% intégration + 5% par pipeline/service)
-
-- (FAC) Fonctionnalité(s) avancée(s) de votre choix. Vous devrez contacter l'équipe d'enseignants pour déterminer si votre idée peut être considérée ou non comme une fonctionnalité avancée et pour déterminer le pointage de celle-ci.
 
 
 ## Consignes de remise
