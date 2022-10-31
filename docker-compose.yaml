@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   frontend:
-    image: localregistry.lc:30500/frontend:submission
+    image: medmouine/frontend:submission
     build:
       context: frontend
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
     - "80:80"
 
   api-gateway:
-    image: localregistry.lc:30500/api-gateway:submission
+    image: medmouine/api-gateway:submission
     build:
       context: api-gateway
       dockerfile: Dockerfile
@@ -24,7 +24,7 @@ services:
     - feedback-api
 
   logic-api:
-    image: localregistry.lc:30500/logic-api:submission
+    image: medmouine/logic-api:submission
     build:
       context: logic-api
       dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
     - "5000:5000"
 
   feedback-api:
-    image: localregistry.lc:30500/feedback-api:submission
+    image: medmouine/feedback-api:submission
     build:
       context: feedback-api
       dockerfile: Dockerfile
