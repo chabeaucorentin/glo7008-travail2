@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   frontend:
-    image: medmouine/frontend:submission
+    image: USERNAME/frontend:submission
     build:
       context: frontend
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
     - "80:80"
 
   api-gateway:
-    image: medmouine/api-gateway:submission
+    image: USERNAME/api-gateway:submission
     build:
       context: api-gateway
       dockerfile: Dockerfile
@@ -24,7 +24,7 @@ services:
     - feedback-api
 
   logic-api:
-    image: medmouine/logic-api:submission
+    image: USERNAME/logic-api:submission
     build:
       context: logic-api
       dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
     - "5000:5000"
 
   feedback-api:
-    image: medmouine/feedback-api:submission
+    image: USERNAME/feedback-api:submission
     build:
       context: feedback-api
       dockerfile: Dockerfile
@@ -41,4 +41,4 @@ services:
     environment:
     - DATABASE_DIR=/usr/db
     volumes:
-     - "./feedback-api/Database:/usr/db"
+    - "./feedback-api/Database:/usr/db"
