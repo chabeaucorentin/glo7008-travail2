@@ -36,11 +36,18 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
+    cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+       - localhost
+      secretName: frontend-tls
   rules:
-    - http:
+    - host: localhost
+      http:
         paths:
           - path: /(.*)
             pathType: ImplementationSpecific
@@ -70,3 +77,4 @@ spec:
                 name: srv-feedback-api
                 port:
                   number: 9000
+
