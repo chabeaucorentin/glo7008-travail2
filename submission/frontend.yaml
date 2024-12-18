@@ -14,6 +14,10 @@ spec:
       labels:
         app: frontend
     spec:
+      initContainers: 
+      - name: wait-for-ingress 
+        image: busybox 
+        command: ['sh', '-c', 'until nc -z -v -w30 ingress-nginx-controller.ingress-nginx.svc.cluster.local 80; do echo waiting for ingress; sleep 5; done']
       containers:
         - name: frontend
           image: glo7008/frontend:submission
@@ -28,29 +32,33 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 80
       targetPort: 80
+      nodePort: 32080
+  type: LoadBalancer
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
-    cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+    #cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   ingressClassName: nginx
   tls:
-    - hosts:
-       - localhost
-      secretName: frontend-tls
+  - hosts:
+    - localhost
+    secretName: frontend-tls
   rules:
     - host: localhost
       http:
         paths:
           - path: /(.*)
-            pathType: ImplementationSpecific
+            pathType: ImplementationSpecific 
             backend:
               service:
                 name: srv-frontend
