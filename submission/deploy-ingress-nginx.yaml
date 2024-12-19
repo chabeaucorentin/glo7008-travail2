@@ -4,6 +4,8 @@ metadata:
   labels:
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
+  annotations:
+    promtail: "enabled"
   name: ingress-nginx
 ---
 apiVersion: v1

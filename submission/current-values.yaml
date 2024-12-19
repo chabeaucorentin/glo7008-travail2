@@ -1,0 +1,60 @@
+USER-SUPPLIED VALUES:
+fluent-bit:
+  enabled: false
+grafana:
+  enabled: false
+loki:
+  config:
+    auth_enabled: false
+    ingester:
+      chunk_idle_period: 5m
+      chunk_retain_period: 30s
+      lifecycler:
+        ring:
+          kvstore:
+            store: inmemory
+          replication_factor: 1
+      max_transfer_retries: 0
+    limits_config:
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 168h
+    schema_config:
+      configs:
+      - from: "2020-10-15"
+        index:
+          period: 24h
+          prefix: index_
+        object_store: filesystem
+        schema: v11
+        store: boltdb-shipper
+    server:
+      grpc_listen_port: 9095
+      http_listen_port: 3100
+    storage_config:
+      boltdb_shipper:
+        active_index_directory: /loki/index
+        cache_location: /loki/cache
+        cache_ttl: 24h
+        shared_store: filesystem
+      filesystem:
+        directory: /loki/chunks
+  enabled: true
+  persistence:
+    accessModes:
+    - ReadWriteOnce
+    enabled: true
+    size: 20Gi
+    storageClassName: ""
+  podSecurityContext:
+    fsGroup: 1000
+    runAsNonRoot: true
+  securityContext:
+    fsGroup: 1000
+    runAsGroup: 1000
+    runAsUser: 1000
+  volumeMounts:
+  - mountPath: /loki
+    name: loki-storage
+promtail:
+  enabled: false

@@ -4,6 +4,8 @@ metadata:
   name: dep-logic-api
   labels:
     app: logic-api
+  annotations:
+    promtail: "enabled"
 spec:
   selector:
     matchLabels:
