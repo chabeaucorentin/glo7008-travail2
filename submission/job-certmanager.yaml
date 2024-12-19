@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wait-for-cert-manager
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - name: wait-for-cert-manager
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Waiting for cert-manager-webhook to be ready..."
+          until kubectl get pods -n cert-manager -l app.kubernetes.io/component=webhook -o jsonpath='{.items[0].status.phase}' | grep -q Running; do
+            echo "Cert-Manager Webhook is not ready. Retrying in 5 seconds..."
+            sleep 5
+          done
+          echo "Cert-Manager Webhook is ready. Applying ClusterIssuer..."
+          kubectl apply -f cluster-issuer.yaml
+        volumeMounts:
+        - name: cluster-issuer
+          mountPath: /manifests
+      restartPolicy: OnFailure
+      volumes:
+      - name: cluster-issuer
+        configMap:
+          name: cluster-issuer-config
+  backoffLimit: 4
+
