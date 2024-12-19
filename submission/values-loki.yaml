@@ -1,0 +1,31 @@
+persistence:
+  enabled: true
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+
+config:
+  auth_enabled: false
+  server:
+    http_listen_port: 3100
+  ingester:
+    lifecycler:
+      ring:
+        kvstore:
+          store: inmemory
+        replication_factor: 1
+  storage_config:
+    boltdb:
+      directory: /data/loki/index
+    filesystem:
+      directory: /data/loki/chunks
+  schema_config:
+    configs:
+      - from: 2020-10-24
+        store: boltdb
+        object_store: filesystem
+        schema: v11
+        index:
+          prefix: index_
+          period: 168h

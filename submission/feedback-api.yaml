@@ -4,6 +4,8 @@ metadata:
   name: dep-feedback-api
   labels:
     app: feedback-api
+  annotations:
+    promtail: "enabled"
 spec:
   selector:
     matchLabels:

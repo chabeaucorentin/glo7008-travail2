@@ -4,6 +4,8 @@ metadata:
   name: dep-frontend
   labels:
     app: frontend
+  annotations:
+    promtail: "enabled"
 spec:
   selector:
     matchLabels:
@@ -13,6 +15,8 @@ spec:
     metadata:
       labels:
         app: frontend
+      annotations:  # Ajout des annotations ici
+        promtail: "enabled"    
     spec:
       initContainers: 
       - name: wait-for-ingress 
